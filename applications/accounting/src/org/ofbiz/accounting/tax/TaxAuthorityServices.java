@@ -562,7 +562,11 @@ public class TaxAuthorityServices {
             adjValue.set("customerReferenceId", partyTaxInfo.get("partyTaxId"));
             if ("Y".equals(partyTaxInfo.getString("isExempt"))) {
                 adjValue.set("amount", BigDecimal.ZERO);
-                adjValue.set("exemptAmount", taxAmount);
+                if (adjValue.getBigDecimal("amountAlreadyIncluded").compareTo(BigDecimal.ZERO) != 0) {
+                    adjValue.set("exemptAmount", adjValue.getBigDecimal("amountAlreadyIncluded"));
+                } else {
+                    adjValue.set("exemptAmount", taxAmount);
+                }
                 foundExemption = true;
             }
         }
