@@ -448,7 +448,7 @@ public class TaxAuthorityServices {
                 }
                 GenericValue taxAdjValue = delegator.makeValue("OrderAdjustment");
 
-                if (productPrice != null && "Y".equals(productPrice.getString("taxInPrice"))) {
+                if ((productPrice != null && "Y".equals(productPrice.getString("taxInPrice"))) || "Y".equals(productStore.getString("showPricesWithVatTax"))) {
                     // tax is in the price already, so we want the adjustment to be a VAT_TAX adjustment to be subtracted instead of a SALES_TAX adjustment to be added
                     taxAdjValue.set("orderAdjustmentTypeId", "VAT_TAX");
 
