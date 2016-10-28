@@ -347,6 +347,11 @@ under the License.
               <#if orderItemAdjustment.customerReferenceId?has_content>${uiLabelMap.OrderCustomerTaxId}: ${orderItemAdjustment.customerReferenceId}</#if>
               <#if orderItemAdjustment.exemptAmount??>${uiLabelMap.EcommerceExemptAmount}: ${orderItemAdjustment.exemptAmount}</#if>
             </#if>
+            <#if orderItemAdjustment.orderAdjustmentTypeId == "VAT_TAX">
+                <#if orderItemAdjustment.amountAlreadyIncluded?has_content>
+                  : <@ofbizCurrency amount=orderItemAdjustment.amountAlreadyIncluded isoCode=currencyUomId/>
+                </#if>
+            </#if>
           </@td>
           <@td colspan="5"></@td>
           <@td>
