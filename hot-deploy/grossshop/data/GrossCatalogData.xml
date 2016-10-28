@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+
+    <!-- Scipio: NOTES: 
+      * Some of the IDs from old ecommerce stock data have been changed, but not all yet:
+        Generally, the completely new elements get a new IDs (from a new series of numbers, where applicable) 
+        as well as existing elements that have been modified from their original structure.
+        However, elements that are only superficially changed keep their old IDs (for now), in part
+        because of global references in other files and logically because they haven't really changed.
+        Special case: Many of the old products have keep the number part of their old IDs but given a new prefix,
+            so they are both clear but also easily traced back to the originals.
+      * For every product or category field that has localized content (in DemoCatalogI18n.xml or other), the corresponding field
+        on Product and ProductCategory must be omitted; otherwise, they override the localized content.
+      * Some of the products here are referenced in tests and demo data in other applications (implied dependency on shop demo data, resolved with placeholders)
+    -->
+
+    <!-- CATALOGS -->
+    
+    <ProdCatalog prodCatalogId="GrossDemoCatalog" catalogName="Gross Demo Catalog" useQuickAdd="Y"/>
+    <ProductStoreCatalog productStoreId="GrossShop" prodCatalogId="GrossDemoCatalog" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+
+
+    <!-- CATEGORIES -->
+
+    <!-- Scipio: NOTES: 
+      * Most categories are now defined here except old Rental catalog/categories (DemoRental*.xml)
+        and specific best-selling categories (DemoCatalogTransientData.xml) 
+      * Category names are in DemoCatalogI18n.xml 
+    -->
+
+    <ProductCategory description="Gross Demo Catalog Primary Category Root" longDescription="Gross Demo Catalog Primary Category Root" 
+        productCategoryId="GRCATALOG1" productCategoryTypeId="CATALOG_CATEGORY"/>
+
+    <!-- Scipio: New categories and categories moved and renamed from other locations (all these have new IDs) -->
+    <ProductCategory description="Clothing" longDescription="Clothing"
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="GRCLOTH-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Menswear" longDescription="Menswear"
+            primaryParentCategoryId="GRCLOTH-100" productCategoryId="GRCL-MEN-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Womenswear" longDescription="Womenswear"
+            primaryParentCategoryId="GRCLOTH-100" productCategoryId="GRCL-WMN-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        
+    <ProductCategory description="Electronics" longDescription="Electronics"
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="GRELTRN-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Computer" longDescription="Computer"
+            primaryParentCategoryId="GRELTRN-100" productCategoryId="GRPC-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+            <ProductCategory description="Computer Systems (Desktops, Laptops, Tablets)" longDescription="Computer Systems (Desktops, Laptops, Tablets)"
+                primaryParentCategoryId="GRPC-101" productCategoryId="GRPC-SYS-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+            <ProductCategory description="Software" longDescription="Software"
+                primaryParentCategoryId="GRPC-101" productCategoryId="GRPC-SW-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+            <ProductCategory description="Computer Accessories" longDescription="Computer Accessories"
+                primaryParentCategoryId="GRPC-101" productCategoryId="GRPC-AC-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+                <ProductCategory description="Peripherals" longDescription="Peripherals"
+                    primaryParentCategoryId="GRPC-AC-101" productCategoryId="GRPC-PR-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="MP3 Players" longDescription="MP3 Players"
+            primaryParentCategoryId="GRELTRN-100" productCategoryId="GREL-MP3-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Phones" longDescription="Phones"
+            primaryParentCategoryId="GRELTRN-100" productCategoryId="GREL-PHN-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        
+    <ProductCategory description="Media Entertainment" longDescription="Media Entertainment" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="GRMEDIA-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Music" longDescription="Music"
+            primaryParentCategoryId="GRMEDIA-100" productCategoryId="GRMUSIC-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+            <ProductCategory description="Music CDs (Hard Copies)" longDescription="Music CDs (Hard Copies)"
+                primaryParentCategoryId="GRMUSIC-101" productCategoryId="GRMU-CD-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+            <ProductCategory description="Downloadable Albums (MP3s and Files)" longDescription="Downloadable Albums (MP3s and Files)"
+                primaryParentCategoryId="GRMUSIC-101" productCategoryId="GRMU-DL-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+<!--             
+    <ProductCategory description="Travel Products and Rentals" longDescription="Travel Products and Rentals" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="TRVL-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+
+    <ProductCategory description="Vehicles, Automobiles and Accessories" longDescription="Vehicles, Automobiles and Accessories" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="AUTO-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+
+    <ProductCategory description="Subscriptions" longDescription="Subscriptions"
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="SUBS-100" productCategoryTypeId="CATALOG_CATEGORY"/>    
+    <ProductCategory description="Financial" longDescription="Financial"
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="FIN-100" productCategoryTypeId="CATALOG_CATEGORY"/>    
+    <ProductCategory description="Groceries" longDescription="Groceries" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="FOOD-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+    <ProductCategory description="Services" longDescription="Services" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="SERV-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+    <ProductCategory description="Gift Cards" longDescription="Gift Cards" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="GFTC-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Gift Cards - Purchases" longDescription="Gift Cards - Purchases" 
+            primaryParentCategoryId="GFTC-100" productCategoryId="GC-PR-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Gift Cards - Reloads"  longDescription="Gift Cards - Reloads" 
+            primaryParentCategoryId="GFTC-100" productCategoryId="GC-RL-101" productCategoryTypeId="CATALOG_CATEGORY"/>
+        <ProductCategory description="Gift Cards" longDescription="Gift Cards" 
+            primaryParentCategoryId="GFTC-100" productCategoryId="GC-SP-101" productCategoryTypeId="GIFT_CARD_CATEGORY"/>
+
+    <ProductCategory description="Drop-Ship Products" longDescription="Drop-Ship Products" 
+        primaryParentCategoryId="GRCATALOG1" productCategoryId="DROP-100" productCategoryTypeId="CATALOG_CATEGORY"/>
+ -->
+    <!-- Scipio: Special categories (NOTE: these still using stock IDs) -->
+    <!-- 
+    <ProductCategory description="Promotions" longDescription="Promotions" 
+        productCategoryId="PROMOTIONS" productCategoryTypeId="CATALOG_CATEGORY" detailScreen="component://shop/widget/CatalogScreens.xml#categorydetailmatrix"/>
+    -->
+    <ProductCategory description="Demo Default Search" longDescription="Catalog1 Search Products - only products in this category will show up in a search in catalog1"
+        productCategoryId="GRCATALOG1_SEARCH" productCategoryTypeId="SEARCH_CATEGORY"/>
+    <ProductCategory description="Main Quick Add" longDescription="For quick orders, you have found the right place!" 
+        productCategoryId="GRCATALOG1_QUICKADD1" productCategoryTypeId="QUICKADD_CATEGORY"/>
+    <ProductCategory description="Electronics Quick Add" longDescription="Get all your electronics here!" 
+        productCategoryId="GRCATALOG1_QUICKADD2" productCategoryTypeId="QUICKADD_CATEGORY"/>
+    <ProductCategory description="Best Selling" longDescription="Demo Best Selling"
+        productCategoryId="GRCATALOG1_BEST_SELL" productCategoryTypeId="BEST_SELL_CATEGORY"/>
+        <!-- NOTE: The specific BEST-SELL categories are defined in DemoCatalogTransientData.xml -->
+
+    <!-- Scipio: Other categories -->
+<!-- 
+    <ProductCategory categoryName="Test Limited Admin Category" longDescription="Test Limited Admin Category" 
+        productCategoryId="TSTLTDADMIN" productCategoryTypeId="CATALOG_CATEGORY"/>
+    <ProductCategoryRole productCategoryId="TSTLTDADMIN" partyId="ltdadmin" roleTypeId="LTD_ADMIN" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryRole productCategoryId="TSTLTDADMIN" partyId="ltdadmin1" roleTypeId="LTD_ADMIN" fromDate="2001-05-13 12:00:00.0"/>
+
+    <!-- Catalog-category associations -->
+    
+    <ProdCatalogCategory prodCatalogId="GrossDemoCatalog" productCategoryId="GRCATALOG1" fromDate="2001-05-13 12:00:00.0"
+        sequenceNum="01" prodCatalogCategoryTypeId="PCCT_BROWSE_ROOT"/>
+    <ProdCatalogCategory prodCatalogId="GrossDemoCatalog" productCategoryId="GRCATALOG1_SEARCH" fromDate="2001-05-13 12:00:00.0"
+        sequenceNum="01" prodCatalogCategoryTypeId="PCCT_SEARCH"/>
+    <ProdCatalogCategory prodCatalogId="GrossDemoCatalog" productCategoryId="GRCATALOG1_QUICKADD1" fromDate="2001-05-13 12:00:00.0"
+        sequenceNum="01" prodCatalogCategoryTypeId="PCCT_QUICK_ADD"/>
+    <ProdCatalogCategory prodCatalogId="GrossDemoCatalog" productCategoryId="GRCATALOG1_QUICKADD2" fromDate="2001-05-13 12:00:00.0"
+        sequenceNum="02" prodCatalogCategoryTypeId="PCCT_QUICK_ADD"/>
+    <!--
+    <ProdCatalogCategory prodCatalogId="GrossDemoCatalog" productCategoryId="PROMOTIONS" fromDate="2001-05-13 12:00:00.0"
+        sequenceNum="01" prodCatalogCategoryTypeId="PCCT_PROMOTIONS"/>
+
+    <ProdCatalogCategory prodCatalogId="GrossDemoCatalog" productCategoryId="GRCATALOG1_BEST_SELL" fromDate="2010-01-01 12:00:00.0" 
+        sequenceNum="01" prodCatalogCategoryTypeId="PCCT_BEST_SELL"/>
+    -->    <!-- Category rollup/hierarchy -->
+    
+    <!--  Scipio: New categories -->
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRCATALOG1" productCategoryId="GRCLOTH-100" sequenceNum="010"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRCLOTH-100" productCategoryId="GRCL-MEN-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRCLOTH-100" productCategoryId="GRCL-WMN-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRCATALOG1" productCategoryId="GRELTRN-100" sequenceNum="020"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRELTRN-100" productCategoryId="GRPC-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRELTRN-100" productCategoryId="GREL-MP3-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRELTRN-100" productCategoryId="GREL-PHN-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRPC-101" productCategoryId="GRPC-SYS-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRPC-101" productCategoryId="GRPC-SW-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRPC-101" productCategoryId="GRPC-AC-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRPC-AC-101" productCategoryId="GRPC-PR-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRCATALOG1" productCategoryId="GRMEDIA-100" sequenceNum="090"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRMEDIA-100" productCategoryId="GRMUSIC-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRMUSIC-101" productCategoryId="GRMU-CD-101"/>
+    <ProductCategoryRollup fromDate="2001-05-13 12:00:00.0" parentProductCategoryId="GRMUSIC-101" productCategoryId="GRMU-DL-101"/>
+
+    <!-- Scipio: Category links (examples) -->
+    <ProductCategoryLink productCategoryId="GRCLOTH-100" linkSeqId="01" fromDate="2001-05-13 12:00:00.0"
+        titleText="See all clothing with standard colors feature" detailText="Click here to find clothing with standard colors feature"
+        imageUrl="/images/products/small/handshake_01.png"
+        sequenceNum="02" linkTypeEnumId="PCLT_SEARCH_PARAM"
+        linkInfo="SEARCH_CATEGORY_ID1=CLOTH-100&amp;SEARCH_SUB_CATEGORIES1=Y&amp;SEARCH_FEAT1=7100&amp;sortOrder=SortKeywordRelevancy&amp;sortAscending=N"/>
+    <ProductCategoryLink productCategoryId="GRMUSIC-101" linkSeqId="02" fromDate="2001-05-13 12:00:00.0"
+        titleText="Go To Google" detailText="If you cannot find the music you're looking for here, try it on Google."
+        imageUrl="http://www.google.com/intl/en_ALL/images/logo.gif"
+        sequenceNum="01" linkTypeEnumId="PCLT_ABS_URL"
+        linkInfo="http://www.google.com/"/>
+    <ProductCategoryLink productCategoryId="GRMEDIA-100" linkSeqId="03" fromDate="2001-05-13 12:00:00.0"
+        sequenceNum="03" linkTypeEnumId="PCLT_CAT_ID" linkInfo="GRMUSIC-101"/>
+            
+    <!-- Category Alternative URL -->    
+        
+    <!-- Scipio: TEMPLATE (variables surrounded by underscores _XXX_)
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="_ID_-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="DR_ID_-ALTEN" localeString="en_US"/>
+    
+    <ElectronicText dataResourceId="_ID_-ALT" textData="_ALTNAME_"/>
+    <ElectronicText dataResourceId="DR_ID_-ALTEN" textData="_ALTNAME_"/>
+    
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="_ID_-ALT" dataResourceId="_ID_-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="C_ID_-ALTEN" dataResourceId="DR_ID_-ALTEN"/>
+    
+    <ContentAssoc contentId="_ID_-ALT" contentIdTo="C_ID_-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="_ID_" contentId="_ID_-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    -->
+        
+    <!-- Scipio: New Category Alternative URL -->
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CLOTH-100-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCLOTH-100-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CL-MEN-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCL-MEN-101-ALT" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CL-WMN-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCL-WMN-101-ALT" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-ELTRN-100-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRELTRN-100-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PC-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPC-101-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-EL-MP3-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DREL-MP3-101-ALT" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PC-SYS-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPC-SYS-101-ALT" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PC-SW-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPC-SW-101-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PC-AC-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPC-AC-101-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PC-PR-101-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPC-PR-101-ALTEN" localeString="en_US"/>
+    
+    <ElectronicText dataResourceId="GR-CLOTH-100-ALT" textData="clothing"/>
+    <ElectronicText dataResourceId="GR-DRCLOTH-100-ALTEN" textData="clothing"/>
+    <ElectronicText dataResourceId="GR-CL-MEN-101-ALT" textData="clothing-men"/>
+    <ElectronicText dataResourceId="GR-DRCL-MEN-101-ALT" textData="clothing-men"/>
+    <ElectronicText dataResourceId="GR-CL-WMN-101-ALT" textData="clothing-women"/>
+    <ElectronicText dataResourceId="GR-DRCL-WMN-101-ALT" textData="clothing-women"/>
+    <ElectronicText dataResourceId="GR-ELTRN-100-ALT" textData="electronics"/>
+    <ElectronicText dataResourceId="GR-DRELTRN-100-ALTEN" textData="electronics"/>
+    <ElectronicText dataResourceId="GR-PC-101-ALT" textData="computers"/>
+    <ElectronicText dataResourceId="GR-DRPC-101-ALTEN" textData="computers"/>
+    <ElectronicText dataResourceId="GR-EL-MP3-101-ALT" textData="mp3-players"/>
+    <ElectronicText dataResourceId="GR-DREL-MP3-101-ALT" textData="mp3-players"/>
+    <ElectronicText dataResourceId="GR-PC-SYS-101-ALT" textData="pc-systems"/>
+    <ElectronicText dataResourceId="GR-DRPC-SYS-101-ALT" textData="pc-systems"/>
+    <ElectronicText dataResourceId="GR-PC-SW-101-ALT" textData="software"/>
+    <ElectronicText dataResourceId="GR-DRPC-SW-101-ALTEN" textData="software"/>
+    <ElectronicText dataResourceId="GR-PC-AC-101-ALT" textData="accessories"/>
+    <ElectronicText dataResourceId="GR-DRPC-AC-101-ALTEN" textData="accessories"/>
+    <ElectronicText dataResourceId="GR-PC-PR-101-ALT" textData="peripherals"/>
+    <ElectronicText dataResourceId="GR-DRPC-PR-101-ALTEN" textData="peripherals"/>
+    
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-CLOTH-100-ALT" dataResourceId="GR-CLOTH-100-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CCLOTH-100-ALTEN" dataResourceId="GR-DRCLOTH-100-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-CL-MEN-101-ALT" dataResourceId="GR-CL-MEN-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CCL-MEN-101-ALTEN" dataResourceId="GR-DRCL-MEN-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-CL-WMN-101-ALT" dataResourceId="GR-CL-WMN-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CCL-WMN-101-ALTEN" dataResourceId="GR-DRCL-WMN-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-ELTRN-100-ALT" dataResourceId="GR-ELTRN-100-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CELTRN-100-ALTEN" dataResourceId="GR-DRELTRN-100-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PC-101-ALT" dataResourceId="GR-PC-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPC-101-ALTEN" dataResourceId="GR-DRPC-101-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-EL-MP3-101-ALT" dataResourceId="GR-EL-MP3-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPC-101-ALTEN" dataResourceId="GR-DRPC-101-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PC-SYS-101-ALT" dataResourceId="GR-PC-SYS-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPC-SYS-101-ALTEN" dataResourceId="GR-DRPC-SYS-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PC-SW-101-ALT" dataResourceId="GR-PC-SW-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPC-SW-101-ALTEN" dataResourceId="GR-DRPC-SW-101-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PC-AC-101-ALT" dataResourceId="GR-PC-AC-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPC-AC-101-ALTEN" dataResourceId="GR-DRPC-AC-101-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PC-PR-101-ALT" dataResourceId="GR-PC-PR-101-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPC-PR-101-ALTEN" dataResourceId="GR-DRPC-PR-101-ALTEN"/>
+    <ContentAssoc contentId="GR-CLOTH-100-ALT" contentIdTo="GR-CCLOTH-100-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CL-MEN-101-ALT" contentIdTo="GR-CCL-MEN-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CL-WMN-101-ALT" contentIdTo="GR-CCL-WMN-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-ELTRN-100-ALT" contentIdTo="GR-CELTRN-100-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PC-101-ALT" contentIdTo="GR-CPC-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-EL-MP3-101-ALT" contentIdTo="GR-CPC-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PC-SYS-101-ALT" contentIdTo="GR-CPC-SYS-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PC-SW-101-ALT" contentIdTo="GR-CPC-SW-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PC-AC-101-ALT" contentIdTo="GR-CPC-AC-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PC-PR-101-ALT" contentIdTo="GR-CPC-PR-101-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRCLOTH-100" contentId="GR-CLOTH-100-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRCL-MEN-101" contentId="GR-CL-MEN-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRCL-WMN-101" contentId="GR-CL-WMN-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRELTRN-100" contentId="GR-ELTRN-100-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRPC-101" contentId="GR-PC-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GREL-MP3-101" contentId="GR-EL-MP3-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRPC-SYS-101" contentId="GR-PC-SYS-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRPC-SW-101" contentId="GR-PC-SW-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRPC-AC-101" contentId="GR-PC-AC-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryContent prodCatContentTypeId="ALTERNATIVE_URL" productCategoryId="GRPC-PR-101" contentId="GR-PC-PR-101-ALT" fromDate="2001-05-13 12:00:00.0"/>
+    
+    <!-- PRODUCTS -->
+    <!-- Scipio: NOTE: These are not exhaustive; other products exist in the specialized data files.
+        See also DemoCatalogGenericProductData.xml for generic templated products. -->
+ 
+    <Product productId="GR-PH-1000" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GREL-PHN-101" productName="iPhone 5" internalName="iPhone 5" description="The popular iPhone 5" longDescription="This iPhone is very small and supports all the latest applications." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-PH-1001" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GREL-PHN-101" productName="iPhone 6" internalName="iPhone 6" description="The popular iPhone 6" taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-PH-1004" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GREL-PHN-101" productName="iPhone 7" internalName="iPhone 7" description="The latest iPhone 7" longDescription="This is the lastest, cutting-edge iPhone." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-PH-1005" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GREL-PHN-101" productName="iPhone Business" internalName="iPhone Business" description="iPhone Large Business Model" taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin">
+        <longDescription><![CDATA[This is a larger, business-oriented version of the popular iPhone.<br/><br/>It is recommended for those with advanced business requirements.]]></longDescription>
+    </Product>
+
+    <Product productId="GR-SW-1006" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-SW-101" productName="LicenseToolPlus" internalName="LicenseToolPlus" description="LicenseToolPlus licensing helper application" longDescription="LicenseToolPlus is a program that helps you analyze your code and software to meet licensing criteria." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="Y" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-SW-1006-1" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-SW-101" productName="LicenseToolPlus (LGPL)" internalName="LicenseToolPlus (LGPL)" description="LicenseToolPlus licensing helper application" longDescription="LicenseToolPlus is a program that helps you analyze your code and software to meet licensing criteria. This edition helps software conform to the LGPL license." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="Y" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-SW-1006-2" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-SW-101" productName="LicenseToolPlus (GPL)" internalName="LicenseToolPlus (GPL)" description="LicenseToolPlus licensing helper application" longDescription="LicenseToolPlus is a program that helps you analyze your code and software to meet licensing criteria. This edition helps software conform to the GPL license." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="Y" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-SW-1006-3" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-SW-101" productName="LicenseToolPlus (BSD)" internalName="LicenseToolPlus (BSD)" description="LicenseToolPlus licensing helper application" longDescription="LicenseToolPlus is a program that helps you analyze your code and software to meet licensing criteria. This edition helps software conform to the BSD license." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="Y" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-SW-1006-4" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-SW-101" productName="LicenseToolPlus (MIT)" internalName="LicenseToolPlus (MIT)" description="LicenseToolPlus licensing helper application" longDescription="LicenseToolPlus is a program that helps you analyze your code and software to meet licensing criteria. This edition helps software conform to the MIT license." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="Y" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-SW-1006-5" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-SW-101" productName="LicenseToolPlus (ASL2)" internalName="LicenseToolPlus (ASL)" description="LicenseToolPlus licensing helper application" longDescription="LicenseToolPlus is a program that helps you analyze your code and software to meet licensing criteria. This edition helps software conform to the ASL license." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="Y" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    
+    <Product productId="GR-CD-2002" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRMU-CD-101" productName="U2 - Greatest Hits (CD)" internalName="U2 - Greatest Hits (CD)" description="U2 - Greatest Hits (CD)" longDescription="A compilation of U2's greatest hits from every era." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-CAM-2644" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRELTRN-100" productName="Nikon Analog Camera" internalName="Nikon Analog Camera" description="The retro analog Nikon camera with FM2 film" longDescription="The retro analog Nikon camera with FM2 film. Produces beautiful, natural photographs." isVirtual="N" isVariant="N" weight="7.0"/>
+    <!-- NOTE: Product name and description are omitted because they are specified as localized content -->
+    <Product productId="GR-CL-5005" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRCL-MEN-101" productName="Men's Jacket" internalName="Men's Jacket" description="A stylish men's jacket" taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-CL-7000" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRCL-WMN-101" productName="Blouse" internalName="Blouse" description="A stylish woman's blouse" taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <Product productId="GR-CL-8544" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRCL-WMN-101" productName="Women's Socks" internalName="Women's Socks" description="Women's Socks" longDescription="Women's socks variety pack" isVirtual="N" isVariant="N" quantityIncluded="12" weight="0.5"/>
+    <Product productId="GR-MPL-9290" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRELTRN-100" productName="Thumb MP3 Player" internalName="Thumb MP3 Player" description="A thumbdrive-like MP3 player" longDescription="This MP3 player provides high fedility sound and is easy on batteries. It can connect directly to a computer via USB like a thumb drive." taxable="Y" chargeShipping="Y" autoCreateKeywords="Y" isVirtual="N" isVariant="N" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+
+    <Product productId="GR-CDR-1111" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-AC-101" productName="CD-R Writable Discs" internalName="CD-R Writable Discs" description="CD-R Writable Discs (1 spindle, 50-count)" longDescription="These CD-R writable discs are reliable and long-lasting and will preserve your date for ages. 1 spindle of 50 discs." isVirtual="N" isVariant="N" quantityIncluded="50.0" weight="2.0"/>
+    <Product productId="GR-KB-5569" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRPC-PR-101" productName="USB Keyboard" internalName="USB Keyboard" description="USB Keyboard - Chrome Colored" longDescription="This USB keyboard is comfortable and easy to clean." isVirtual="N" isVariant="N" weight="4.0"/>
+  
+    <Product productId="GR-CL-1000" productTypeId="FINISHED_GOOD" primaryProductCategoryId="GRCL-MEN-101" productName="Men's T-Shirt" internalName="Men's T-Shirt" description="Men's T-Shirt" longDescription="A sleek T-Shirt in a variety of colors and sizes." isVirtual="Y" isVariant="N" weight="1" virtualVariantMethodEnum="VV_FEATURETREE" />
+
+    
+    <!-- Product Alternative URL -->
+    
+    <!-- Scipio: TEMPLATE:
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="_ID_-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="DR_ID_-ALTEN" localeString="en_US"/>
+    
+    <ElectronicText dataResourceId="_ID_-ALT" textData="car-mustang"/>
+    <ElectronicText dataResourceId="DR_ID_-ALTEN" textData="car-mustang"/>
+    
+    <Content contentId="_ID_-ALT" contentTypeId="DOCUMENT" dataResourceId="_ID_-ALT" localeString="en"/>
+    <Content contentId="C_ID_-ALTEN" contentTypeId="DOCUMENT" dataResourceId="DR_ID_-ALTEN" localeString="en_US"/>
+    
+    <ContentAssoc contentId="_ID_-ALT" contentIdTo="C_ID_-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+        
+    <ProductContent productId="_ID_" contentId="_ID_-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+        
+    <ProductPrice productId="_ID_" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="35.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="_ID_" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="49.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+     -->
+    
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PH-1000-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPH-1000-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PH-1001-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPH-1001-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PH-1004-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPH-1004-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PH-1005-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRPH-1005-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-SW-1006-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRSW-1006-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-SW-1006-1-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRSW-1006-1-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-SW-1006-2-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRSW-1006-2-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-SW-1006-3-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRSW-1006-3-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-SW-1006-4-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRSW-1006-4-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-SW-1006-5-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRSW-1006-5-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CD-2002-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCD-2002-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CAM-2644-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCAM-2644-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CL-5005-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCL-5005-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CL-7000-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCL-7000-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CL-8544-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCL-8544-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-MPL-9290-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRMPL-9290-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CDR-1111-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCDR-1111-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-KB-5569-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRKB-5569-ALTEN" localeString="en_US"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-CL-1000-ALT" localeString="en"/>
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-DRCL-1000-ALTEN" localeString="en_US"/>
+
+    <ElectronicText dataResourceId="GR-PH-1000-ALT" textData="iphone5"/>
+    <ElectronicText dataResourceId="GR-DRPH-1000-ALTEN" textData="iphone5"/>
+    <ElectronicText dataResourceId="GR-PH-1001-ALT" textData="iphone6"/>
+    <ElectronicText dataResourceId="GR-DRPH-1001-ALTEN" textData="iphone6"/>
+    <ElectronicText dataResourceId="GR-PH-1004-ALT" textData="iphone7"/>
+    <ElectronicText dataResourceId="GR-DRPH-1004-ALTEN" textData="iphone7"/>
+    <ElectronicText dataResourceId="GR-PH-1005-ALT" textData="iphone-business"/>
+    <ElectronicText dataResourceId="GR-DRPH-1005-ALTEN" textData="iphone-business"/>
+    <ElectronicText dataResourceId="GR-SW-1006-ALT" textData="license-tool-plus"/>
+    <ElectronicText dataResourceId="GR-DRSW-1006-ALTEN" textData="license-tool-plus"/>
+    <ElectronicText dataResourceId="GR-SW-1006-1-ALT" textData="license-tool-plus-lgpl"/>
+    <ElectronicText dataResourceId="GR-DRSW-1006-1-ALTEN" textData="license-tool-plus-lgpl"/>
+    <ElectronicText dataResourceId="GR-SW-1006-2-ALT" textData="license-tool-plus-gpl"/>
+    <ElectronicText dataResourceId="GR-DRSW-1006-2-ALTEN" textData="license-tool-plus-gpl"/>
+    <ElectronicText dataResourceId="GR-SW-1006-3-ALT" textData="license-tool-plus-bsd"/>
+    <ElectronicText dataResourceId="GR-DRSW-1006-3-ALTEN" textData="license-tool-plus-bsd"/>
+    <ElectronicText dataResourceId="GR-SW-1006-3-ALT" textData="license-tool-plus-mit"/>
+    <ElectronicText dataResourceId="GR-DRSW-1006-3-ALTEN" textData="license-tool-plus-mit"/>
+    <ElectronicText dataResourceId="GR-CD-2002-ALT" textData="u2-greatest-hits"/>
+    <ElectronicText dataResourceId="GR-DRCD-2002-ALTEN" textData="u2-greatest-hits"/>
+    <ElectronicText dataResourceId="GR-CAM-2644-ALT" textData="nikon-analog-camera"/>
+    <ElectronicText dataResourceId="GR-DRCAM-2644-ALTEN" textData="nikon-analog-camera"/>
+    <ElectronicText dataResourceId="GR-CL-5005-ALT" textData="men-jacket"/>
+    <ElectronicText dataResourceId="GR-DRCL-5005-ALTEN" textData="men-jacket"/>
+    <ElectronicText dataResourceId="GR-CL-7000-ALT" textData="women-blouse"/>
+    <ElectronicText dataResourceId="GR-DRCL-7000-ALTEN" textData="women-blouse"/>
+    <ElectronicText dataResourceId="GR-CL-8544-ALT" textData="women-socks"/>
+    <ElectronicText dataResourceId="GR-DRCL-8544-ALTEN" textData="women-socks"/>
+    <ElectronicText dataResourceId="GR-MPL-9290-ALT" textData="thumb-mp3-player"/>
+    <ElectronicText dataResourceId="GR-DRMPL-9290-ALTEN" textData="thumb-mp3-player"/>
+    <ElectronicText dataResourceId="GR-CDR-1111-ALT" textData="cd-r"/>
+    <ElectronicText dataResourceId="GR-DRCDR-1111-ALTEN" textData="cd-r"/>
+    <ElectronicText dataResourceId="GR-KB-5569-ALT" textData="usb-keyboard"/>
+    <ElectronicText dataResourceId="GR-DRKB-5569-ALTEN" textData="usb-keyboard"/>
+    <ElectronicText dataResourceId="GR-CL-1000-ALT" textData="men-t-shirt"/>
+    <ElectronicText dataResourceId="GR-DRCL-1000-ALTEN" textData="men-t-shirt"/>
+
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PH-1000-ALT" dataResourceId="GR-PH-1000-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPH-1000-ALTEN" dataResourceId="GR-DRPH-1000-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PH-1001-ALT" dataResourceId="GR-PH-1001-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPH-1001-ALTEN" dataResourceId="GR-DRPH-1001-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PH-1004-ALT" dataResourceId="GR-PH-1004-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPH-1004-ALTEN" dataResourceId="GR-DRPH-1004-ALTEN"/>
+    <Content contentTypeId="DOCUMENT" localeString="en" contentId="GR-PH-1005-ALT" dataResourceId="GR-PH-1005-ALT"/>
+    <Content contentTypeId="DOCUMENT" localeString="en_US" contentId="GR-CPH-1005-ALTEN" dataResourceId="GR-DRPH-1005-ALTEN"/>
+    <Content contentId="GR-SW-1006-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-SW-1006-ALT" localeString="en"/>
+    <Content contentId="GR-CSW-1006-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRSW-1006-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-SW-1006-1-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-SW-1006-1-ALT" localeString="en"/>
+    <Content contentId="GR-CSW-1006-1-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRSW-1006-1-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-SW-1006-2-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-SW-1006-2-ALT" localeString="en"/>
+    <Content contentId="GR-CSW-1006-2-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRSW-1006-2-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-SW-1006-3-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-SW-1006-3-ALT" localeString="en"/>
+    <Content contentId="GR-CSW-1006-3-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRSW-1006-3-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-SW-1006-4-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-SW-1006-4-ALT" localeString="en"/>
+    <Content contentId="GR-CSW-1006-4-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRSW-1006-4-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-SW-1006-5-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-SW-1006-5-ALT" localeString="en"/>
+    <Content contentId="GR-CSW-1006-5-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRSW-1006-5-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CD-2002-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CD-2002-ALT" localeString="en"/>
+    <Content contentId="GR-CCD-2002-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCD-2002-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CAM-2644-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CAM-2644-ALT" localeString="en"/>
+    <Content contentId="GR-CCAM-2644-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCAM-2644-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CL-5005-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CL-5005-ALT" localeString="en"/>
+    <Content contentId="GR-CCL-5005-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCL-5005-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CL-7000-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CL-7000-ALT" localeString="en"/>
+    <Content contentId="GR-CCL-7000-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCL-7000-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CL-8544-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CL-8544-ALT" localeString="en"/>
+    <Content contentId="GR-CCL-8544-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCL-8544-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-MPL-9290-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-MPL-9290-ALT" localeString="en"/>
+    <Content contentId="GR-CMPL-9290-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRMPL-9290-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CDR-1111-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CDR-1111-ALT" localeString="en"/>
+    <Content contentId="GR-CCDR-1111-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCDR-1111-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-KB-5569-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-KB-5569-ALT" localeString="en"/>
+    <Content contentId="GR-CKB-5569-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRKB-5569-ALTEN" localeString="en_US"/>
+    <Content contentId="GR-CL-1000-ALT" contentTypeId="DOCUMENT" dataResourceId="GR-CL-1000-ALT" localeString="en"/>
+    <Content contentId="GR-CCL-1000-ALTEN" contentTypeId="DOCUMENT" dataResourceId="GR-DRCL-1000-ALTEN" localeString="en_US"/>
+
+    <ContentAssoc contentId="GR-PH-1000-ALT" contentIdTo="GR-CPH-1000-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PH-1001-ALT" contentIdTo="GR-CPH-1001-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PH-1004-ALT" contentIdTo="GR-CPH-1004-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-PH-1005-ALT" contentIdTo="GR-CPH-1005-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-SW-1006-ALT" contentIdTo="GR-CSW-1006-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-SW-1006-1-ALT" contentIdTo="GR-CSW-1006-1-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-SW-1006-2-ALT" contentIdTo="GR-CSW-1006-2-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-SW-1006-3-ALT" contentIdTo="GR-CSW-1006-3-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-SW-1006-4-ALT" contentIdTo="GR-CSW-1006-4-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-SW-1006-5-ALT" contentIdTo="GR-CSW-1006-5-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CD-2002-ALT" contentIdTo="GR-CCD-2002-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CAM-2644-ALT" contentIdTo="GR-CCAM-2644-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CL-5005-ALT" contentIdTo="GR-CCL-5005-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CL-7000-ALT" contentIdTo="GR-CCL-7000-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CL-8544-ALT" contentIdTo="GR-CCL-8544-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-MPL-9290-ALT" contentIdTo="GR-CMPL-9290-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CDR-1111-ALT" contentIdTo="GR-CCDR-1111-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-KB-5569-ALT" contentIdTo="GR-CKB-5569-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+    <ContentAssoc contentId="GR-CL-1000-ALT" contentIdTo="GR-CCL-1000-ALTEN" contentAssocTypeId="ALTERNATE_LOCALE" fromDate="2011-04-26 12:00:00.0"/>
+
+    <ProductContent productId="GR-PH-1000" contentId="GR-PH-1000-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-PH-1001" contentId="GR-PH-1001-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-PH-1004" contentId="GR-PH-1004-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-PH-1005" contentId="GR-PH-1005-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-SW-1006" contentId="GR-SW-1006-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-SW-1006-1" contentId="GR-SW-1006-1-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-SW-1006-2" contentId="GR-SW-1006-2-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-SW-1006-3" contentId="GR-SW-1006-3-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-SW-1006-4" contentId="GR-SW-1006-4-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-SW-1006-5" contentId="GR-SW-1006-5-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CD-2002" contentId="GR-CD-2002-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CAM-2644" contentId="GR-CAM-2644-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CL-5005" contentId="GR-CL-5005-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CL-7000" contentId="GR-CL-7000-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CL-8544" contentId="GR-CL-8544-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-MPL-9290" contentId="GR-MPL-9290-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CDR-1111" contentId="GR-CDR-1111-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-KB-5569" contentId="GR-KB-5569-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductContent productId="GR-CL-1000" contentId="GR-CL-1000-ALT" productContentTypeId="ALTERNATIVE_URL" fromDate="2001-05-13 12:00:00.0"/>
+
+    <!-- Product warnings -->
+    <DataResource dataResourceTypeId="ELECTRONIC_TEXT" dataResourceId="GR-PH-1005-WARN" mimeTypeId="text/plain" dataResourceName="PH-1005 Warning" isPublic="Y"/>
+   
+    <ElectronicText dataResourceId="GR-PH-1005-WARN">
+        <textData><![CDATA[<b>*** Note: This iPhone requires a special business account signup upon receipt of the item to enable all business features. ***</b>]]></textData>
+    </ElectronicText>
+    
+    <Content contentId="GR-PH-1005-WARN" contentTypeId="DOCUMENT" dataResourceId="GR-PH-1005-WARN" mimeTypeId="text/plain" contentName="PH-1005 Warning"/>
+    
+    <ProductContent productId="GR-PH-1005" contentId="GR-PH-1005-WARN" productContentTypeId="WARNINGS" fromDate="2001-05-13 12:00:00.0"/>
+
+    <!-- Product prices -->
+    <ProductPrice productId="GR-PH-1000" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="99.0" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1000" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="109.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1000" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="EUR" productStoreGroupId="_NA_" fromDate="2014-01-01 00:00:00.0" price="73.54" priceWithTax="73.54" priceWithoutTax="69.99" taxAmount="3.55" taxAuthGeoId="FRA" taxAuthPartyId="FRA_TA" taxInPrice="Y" taxPercentage="5.000000"/>
+    <ProductPrice productId="GR-PH-1001" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="159.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1001" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="159.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1004" productPricePurposeId="PURCHASE" productPriceTypeId="AVERAGE_COST" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="189.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1004" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="199.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1004" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="219.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1005" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="399.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-PH-1005" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="399.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-SW-1006" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="1.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-SW-1006" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="5.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CD-2002" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="47.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CD-2002" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="48.0" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CAM-2644" productPricePurposeId="PURCHASE" productPriceTypeId="SPECIAL_PROMO_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="79.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CAM-2644" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="89.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CAM-2644" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="89.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CAM-2644" productPricePurposeId="PURCHASE" productPriceTypeId="SPECIAL_PROMO_PRICE" currencyUomId="EUR" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="79.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"
+     priceWithTax="79.99" priceWithoutTax="67.22" taxAmount="12.77" taxAuthGeoId="DEU" taxAuthPartyId="DEU_BZSt" taxInPrice="Y" taxPercentage="19.000000"/>
+    <ProductPrice productId="GR-CAM-2644" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="EUR" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="89.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"
+     priceWithTax="89.99" priceWithoutTax="75.62" taxAmount="14.37" taxAuthGeoId="DEU" taxAuthPartyId="DEU_BZSt" taxInPrice="Y" taxPercentage="19.000000"/>
+    <ProductPrice productId="GR-CAM-2644" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="EUR" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="89.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"
+     priceWithTax="89.99" priceWithoutTax="75.62" taxAmount="14.37" taxAuthGeoId="DEU" taxAuthPartyId="DEU_BZSt" taxInPrice="Y" taxPercentage="19.000000"/>
+    <ProductPrice productId="GR-CL-5005" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="47.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2003-03-04 19:06:17.991" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CL-5005" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="48.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2003-03-04 19:06:07.286" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CL-7000" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="599.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2003-03-04 19:12:08.765" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CL-7000" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="799.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2003-03-04 19:12:22.736" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CL-8544" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="10.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CL-8544" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="12.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-MPL-9290" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="97.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-MPL-9290" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="99.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CDR-1111" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="29.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-CDR-1111" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="29.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-KB-5569" productPricePurposeId="PURCHASE" productPriceTypeId="SPECIAL_PROMO_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="41.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-KB-5569" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="59.99" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <ProductPrice productId="GR-KB-5569" productPricePurposeId="PURCHASE" productPriceTypeId="LIST_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="60.0" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    <!-- Scipio: minimum prices demoed on foods instead
+    <ProductPrice productId="KB-5569" productPricePurposeId="PURCHASE" productPriceTypeId="MINIMUM_ORDER_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2001-05-13 12:00:00.0" price="100.0" createdDate="2001-05-13 12:00:00.0" createdByUserLogin="admin" lastModifiedDate="2001-05-13 12:00:00.0" lastModifiedByUserLogin="admin"/>
+    -->
+    
+    <!-- Products features -->
+    
+    <ProductFeatureCategory productFeatureCategoryId="GR-8000" description="License Features"/>
+    <ProductFeatureCategoryAppl productFeatureCategoryId="GR-8000" productCategoryId="GRCATALOG1_SEARCH" fromDate="2001-05-13 12:00:00.0"/>
+
+    <ProductFeature productFeatureId="GR-8000" productFeatureCategoryId="GR-8000" productFeatureTypeId="LICENSE" description="LGPL"/>
+    <ProductFeature productFeatureId="GR-8001" productFeatureCategoryId="GR-8000" productFeatureTypeId="LICENSE" description="GPL"/>
+    <ProductFeature productFeatureId="GR-8002" productFeatureCategoryId="GR-8000" productFeatureTypeId="LICENSE" description="BSD"/>
+    <ProductFeature productFeatureId="GR-8003" productFeatureCategoryId="GR-8000" productFeatureTypeId="LICENSE" description="MIT"/>
+    <ProductFeature productFeatureId="GR-8004" productFeatureCategoryId="GR-8000" productFeatureTypeId="LICENSE" description="ASL2"/>
+    
+    <ProductFeatureCategory productFeatureCategoryId="GR-9000" description="Automotive Features"/>
+    <ProductFeatureCategoryAppl productFeatureCategoryId="GR-9000" productCategoryId="GRCATALOG1_SEARCH" fromDate="2001-05-13 12:00:00.0"/>
+
+    <ProductFeature productFeatureId="GR-9000" productFeatureCategoryId="GR-9000" productFeatureTypeId="COLOR" description="Black"/>
+    <ProductFeaturePrice productFeatureId="GR-9000" productPriceTypeId="DEFAULT_PRICE" price="4.30" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeaturePrice productFeatureId="GR-9000" productPriceTypeId="LIST_PRICE" price="4.40" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeaturePrice productFeatureId="GR-9000" productPriceTypeId="AVERAGE_COST" price="2.30" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-9001" productFeatureCategoryId="GR-9000" productFeatureTypeId="COLOR" description="Silver"/>
+    <ProductFeaturePrice productFeatureId="GR-9001" price="4.30" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-9002" productFeatureCategoryId="GR-9000" productFeatureTypeId="SIZE" description="Regular"/>
+    <ProductFeaturePrice productFeatureId="GR-9002" price="5.30" productPriceTypeId="LIST_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-9003" productFeatureCategoryId="GR-9000" productFeatureTypeId="SIZE" description="Large"/>
+    <ProductFeaturePrice productFeatureId="GR-9003" price="2.30" productPriceTypeId="AVERAGE_COST" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+
+    <ProductFeatureIactn productFeatureId="GR-9000" productFeatureIdTo="GR-9002" productId="GR-VH-9944" productFeatureIactnTypeId="FEATURE_IACTN_INCOMP"/>
+
+    <ProductFeatureCategory productFeatureCategoryId="GR-7100" description="Standard Clothing Colors"/>
+    <ProductFeatureCategoryAppl productFeatureCategoryId="GR-7100" productCategoryId="GRCATALOG1_SEARCH" fromDate="2001-05-13 12:00:00.0"/>
+
+    <ProductFeature productFeatureId="GR-7100" productFeatureCategoryId="GR-7100" productFeatureTypeId="COLOR" description="Black"/>
+    <ProductFeaturePrice productFeatureId="GR-7100" productPriceTypeId="DEFAULT_PRICE" price="0.00" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7101" productFeatureCategoryId="GR-7100" productFeatureTypeId="COLOR" description="Blue"/>
+    <ProductFeaturePrice productFeatureId="GR-7101" price="0.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7102" productFeatureCategoryId="GR-7100" productFeatureTypeId="COLOR" description="Red"/>
+    <ProductFeaturePrice productFeatureId="GR-7102" price="0.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7103" productFeatureCategoryId="GR-7100" productFeatureTypeId="COLOR" description="Green"/>
+    <ProductFeaturePrice productFeatureId="GR-7103" price="0.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7104" productFeatureCategoryId="GR-7100" productFeatureTypeId="COLOR" description="Purple"/>
+    <ProductFeaturePrice productFeatureId="GR-7104" price="0.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+
+    <ProductFeatureCategory productFeatureCategoryId="GR-7150" description="Shirt Sizes"/>
+    <ProductFeatureCategoryAppl productFeatureCategoryId="GR-7150" productCategoryId="GRCATALOG1_SEARCH" fromDate="2001-05-13 12:00:00.0"/>
+
+    <ProductFeature productFeatureId="GR-7150" productFeatureCategoryId="GR-7150" productFeatureTypeId="SIZE" description="Regular"/>
+    <ProductFeaturePrice productFeatureId="GR-7150" price="0.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7151" productFeatureCategoryId="GR-7150" productFeatureTypeId="SIZE" description="Small"/>
+    <ProductFeaturePrice productFeatureId="GR-7151" price="0.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7152" productFeatureCategoryId="GR-7150" productFeatureTypeId="SIZE" description="Large"/>
+    <ProductFeaturePrice productFeatureId="GR-7152" price="1.00" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+    <ProductFeature productFeatureId="GR-7153" productFeatureCategoryId="GR-7150" productFeatureTypeId="SIZE" description="Extra-Large"/>
+    <ProductFeaturePrice productFeatureId="GR-7153" price="1.50" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" fromDate="2000-01-01 00:00:00.0"/>
+
+
+    <ProductFeatureAppl productId="GR-SW-1006" productFeatureId="GR-8000"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+    <ProductFeatureAppl productId="GR-SW-1006" productFeatureId="GR-8001"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="2"/>
+    <ProductFeatureAppl productId="GR-SW-1006" productFeatureId="GR-8002"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="3"/>
+    <ProductFeatureAppl productId="GR-SW-1006" productFeatureId="GR-8003"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="4"/>    
+    <ProductFeatureAppl productId="GR-SW-1006" productFeatureId="GR-8004"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="4"/>
+    
+    <ProductFeatureAppl productId="GR-SW-1006-1" productFeatureId="GR-8000"
+        productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+    <ProductFeatureAppl productId="GR-SW-1006-2" productFeatureId="GR-8001"
+        productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+    <ProductFeatureAppl productId="GR-SW-1006-3" productFeatureId="GR-8002"
+        productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+    <ProductFeatureAppl productId="GR-SW-1006-4" productFeatureId="GR-8003"
+        productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+    <ProductFeatureAppl productId="GR-SW-1006-5" productFeatureId="GR-8004"
+        productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="1"/>
+    
+
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7100"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="01"/>
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7101"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="02"/>
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7102"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="03"/>
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7103"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="04"/>    
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7104"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="05"/>
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7150"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="06"/>
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7151"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="07"/>
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7152"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="08"/>    
+    <ProductFeatureAppl productId="GR-CL-1000" productFeatureId="GR-7153"
+        productFeatureApplTypeId="SELECTABLE_FEATURE" fromDate="2001-05-13 12:00:00.0" sequenceNum="09"/>
+    
+
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="GR-SW-1006"
+        productIdTo="GR-SW-1006-1" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="GR-SW-1006"
+        productIdTo="GR-SW-1006-2" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="GR-SW-1006"
+        productIdTo="GR-SW-1006-3" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="GR-SW-1006"
+        productIdTo="GR-SW-1006-4" quantity="1.0" reason=""/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_VARIANT" productId="GR-SW-1006"
+        productIdTo="GR-SW-1006-5" quantity="1.0" reason=""/>
+    
+
+    <!-- Product complements/upgrade/substitutes -->
+    <Product productId="GR-PC-1000" /><!-- Scipio: Defined in another file -->
+    <Product productId="GR-CAM-7000" /><!-- Scipio: Defined in another file -->
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_UPGRADE" productId="GR-MPL-9290"
+        productIdTo="GR-PH-1001" quantity="1.0" reason="If you like listening to music, the iPhone can fill your every need and more!"/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_UPGRADE" productId="GR-CAM-2644"
+        productIdTo="GR-PH-1004" quantity="1.0" reason="If you need to take pictures on the go, the iPhone sports a high-quality integrated camera."/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_COMPLEMENT" productId="GR-KB-5569"
+        productIdTo="GR-PC-1000" quantity="1.0" reason="This USB keyboard's design matches our PC offerings."/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_COMPLEMENT" productId="GR-SW-1006"
+        productIdTo="GR-CDR-1111" quantity="1.0" reason="Have you considered writable discs for distributing your software?"/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_COMPLEMENT" productId="GR-PC-1000"
+        productIdTo="GR-KB-5569" quantity="1.0" reason="This USB keyboard is a good match for a new computer."/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_COMPLEMENT" productId="GR-PC-1000"
+        productIdTo="GR-CDR-1111" quantity="1.0" reason="Make data backups for your new PC with writable discs!"/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_COMPLEMENT" productId="GR-PC-1000"
+        productIdTo="GR-PH-1005" quantity="1.0" reason="For serious work, consider the iPhone Business to take your computer work on the road."/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_COMPLEMENT" productId="GR-CAM-2644"
+        productIdTo="GR-CAM-7000" quantity="1.0" reason="Buy extra film for your camera"/>
+    <ProductAssoc fromDate="2001-05-13 12:00:00.0" productAssocTypeId="PRODUCT_OBSOLESCENCE" productId="GR-PH-1000"
+        productIdTo="GR-PH-1004" quantity="1.0" reason="The iPhone 7 supersedes the iPhone 5, although we still offer the iPhone 5 at a reasonable price."/>
+
+
+    <!-- Product Categories -->
+
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-PH-1000" sequenceNum="10" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-PH-1001" sequenceNum="11" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-PH-1004" sequenceNum="14" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-PH-1005" sequenceNum="15" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-SW-1006" sequenceNum="16" fromDate="2001-05-13 12:00:00.0" comments="LicenseToolPlus is compatible with most source code."/>
+    <ProductCategoryMember productCategoryId="GRMEDIA-100" productId="GR-CD-2002" sequenceNum="22" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-CAM-2644" sequenceNum="26" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCLOTH-100" productId="GR-CL-5005" sequenceNum="55" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCLOTH-100" productId="GR-CL-7000" sequenceNum="70" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRELTRN-100" productId="GR-MPL-9290" sequenceNum="92" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCLOTH-100" productId="GR-CL-1000" sequenceNum="96" fromDate="2001-05-13 12:00:00.0"/>
+
+    <ProductCategoryMember productCategoryId="GREL-PHN-101" productId="GR-PH-1000" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GREL-PHN-101" productId="GR-PH-1001" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GREL-PHN-101" productId="GR-PH-1004" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GREL-PHN-101" productId="GR-PH-1005" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRMU-CD-101" productId="GR-CD-2002" fromDate="2001-05-13 12:00:00.0"/>
+    <!--<ProductCategoryMember productCategoryId="GRELTRN-100" productId="CAM-2644" fromDate="2001-05-13 12:00:00.0"/>-->
+    <ProductCategoryMember productCategoryId="GRCL-MEN-101" productId="GR-CL-5005" fromDate="2001-05-13 12:00:00.0"/>-->
+    <ProductCategoryMember productCategoryId="GRPC-SW-101" productId="GR-SW-1006" fromDate="2001-05-13 12:00:00.0" comments="LicenseToolPlus is compatible with most source code."/>
+    <ProductCategoryMember productCategoryId="GRCL-WMN-101" productId="GR-CL-7000" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCL-WMN-101" productId="GR-CL-8544" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GREL-MP3-101" productId="GR-MPL-9290" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRPC-PR-101" productId="GR-KB-5569" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRPC-AC-101" productId="GR-CDR-1111" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCL-MEN-101" productId="GR-CL-1000" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_QUICKADD1" productId="GR-CAM-2644" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_QUICKADD1" productId="GR-CL-8544" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_QUICKADD1" productId="GR-CDR-1111" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_QUICKADD1" productId="GR-KB-5569" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_QUICKADD2" productId="GR-CDR-1111" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_QUICKADD2" productId="GR-KB-5569" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-PH-1000" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-PH-1001" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-PH-1004" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-PH-1005" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-SW-1006" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-CD-2002" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-CAM-2644" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-CL-5005" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-CL-7000" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-CL-8544" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-MPL-9290" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-CDR-1111" fromDate="2001-05-13 12:00:00.0"/>
+    <ProductCategoryMember productCategoryId="GRCATALOG1_SEARCH" productId="GR-KB-5569" fromDate="2001-05-13 12:00:00.0"/>
+
+    <!-- Product Facility/Stock -->
+
+    <!-- some default product facility settings -->
+    <ProductFacility productId="GR-CAM-2644" facilityId="GrossShopWarehouse" minimumStock="2" reorderQuantity="10" daysToShip="15"/>
+    <ProductFacility productId="GR-CL-8544" facilityId="GrossShopWarehouse" minimumStock="20" reorderQuantity="50" daysToShip="1"/>
+    <ProductFacility productId="GR-CDR-1111" facilityId="GrossShopWarehouse" minimumStock="2" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="GR-KB-5569" facilityId="GrossShopWarehouse" minimumStock="15" reorderQuantity="40" daysToShip="2"/>
+    <ProductFacility productId="GR-PH-1000" facilityId="GrossShopWarehouse" minimumStock="2" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="GR-PH-1001" facilityId="GrossShopWarehouse" minimumStock="2" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="GR-PH-1004" facilityId="GrossShopWarehouse" minimumStock="2" reorderQuantity="10" daysToShip="1"/>
+    <ProductFacility productId="GR-CL-1000" facilityId="GrossShopWarehouse" minimumStock="2" reorderQuantity="10" daysToShip="2"/>
+
+    <ProductFacilityLocation productId="GR-CAM-2644" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLUL01"/>
+    <ProductFacilityLocation productId="GR-CAM-2644" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLLL01" minimumStock="2" moveQuantity="5"/>
+    <ProductFacilityLocation productId="GR-CL-8544" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLUL02"/>
+    <ProductFacilityLocation productId="GR-CL-8544" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLLL02" minimumStock="5" moveQuantity="20"/>
+    <ProductFacilityLocation productId="GR-CDR-1111" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLUL03"/>
+    <ProductFacilityLocation productId="GR-CDR-1111" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLLL03" minimumStock="2" moveQuantity="5"/>
+    <ProductFacilityLocation productId="GR-KB-5569" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLUL04"/>
+    <ProductFacilityLocation productId="GR-KB-5569" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLLL04" minimumStock="5" moveQuantity="20"/>
+    <ProductFacilityLocation productId="GR-PH-1000" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLUL01" minimumStock="5" moveQuantity="20"/>
+    <ProductFacilityLocation productId="GR-PH-1001" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLLL02" minimumStock="5" moveQuantity="20"/>
+    <ProductFacilityLocation productId="GR-PH-1004" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLLL04" minimumStock="5" moveQuantity="20"/>
+    <ProductFacilityLocation productId="GR-CL-1000" facilityId="GrossShopWarehouse" locationSeqId="TLTLTLUL02" minimumStock="2" moveQuantity="20"/>
+
+    <!-- Demo product tags -->
+    <ProductKeyword productId="GR-PH-1000" keyword="iphone5" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-PH-1001" keyword="iphone6" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CD-2002" keyword="u2" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CD-2002" keyword="hits" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CAM-2644" keyword="camera" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CAM-2644" keyword="nikon" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CL-5005" keyword="jacket" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CDR-1111" keyword="red" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-PH-1004" keyword="iphone7" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CAM-2644" keyword="red" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-KB-5569" keyword="keyboard" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-PH-1000" keyword="phone" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-PH-1000" keyword="iphone" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CL-8544" keyword="socks" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CDR-1111" keyword="disc" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-SW-1006" keyword="standard" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CL-1000" keyword="shirt" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+    <ProductKeyword productId="GR-CL-1000" keyword="tee" keywordTypeId="KWT_TAG" statusId="KW_APPROVED"/>
+
+</entity-engine-xml>

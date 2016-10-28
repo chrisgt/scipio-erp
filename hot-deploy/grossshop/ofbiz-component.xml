@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofbiz-component name="grossshop"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
+    <!-- define resource loaders; most common is to use the component resource loader -->
+    <resource-loader name="main" type="component"/>
+
+    <!-- place the config directory on the classpath to access configuration files -->
+    <classpath type="dir" location="config"/>
+    <classpath type="dir" location="dtd"/>
+
+    <!-- load single or multiple external libraries -->
+    <classpath type="jar" location="build/lib/*"/>
+    <classpath type="jar" location="lib/*"/>
+
+    <!-- entity resources: model(s), eca(s), group, and data definitions -->
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodel.xml"/>
+    <!-- <entity-resource type="eca" reader-name="main" loader="main" location="entitydef/eecas.xml"/> -->
+
+    <!-- Logins -->
+    <entity-resource type="data" reader-name="seed-initial" loader="main" location="data/PasswordSecurityData.xml"/>
+
+    <!-- Gross pricesScipio: demo data structure is derived from the original data under /applications/shop/data/ 
+        but modified to work with gross prices. -->
+
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/DemoTaxAuthority.xml"/>
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/DemoTaxAuthorityData.xml"/>
+
+    <!-- demo data: store -->
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/GrossShopOrganizationData.xml"/>
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/GrossStoreData.xml"/>
+    <!-- <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoRentalStoreData.xml"/> -->
+
+    <!-- demo data: catalog - basic -->
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/GrossCatalogData.xml"/>
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/GrossCatalogGenericProductData.xml"/>
+    <!-- <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/DemoRentalCatalogData.xml"/>-->
+
+    <!-- demo data: survey -->
+    <!-- 
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoSurveyData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoSurveyTestData.xml"/>
+     -->
+    <!-- demo data: content - basic -->
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/GrossWebSitePublishData.xml"/>
+    <!-- 
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoTemplateData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoContentData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoTopicData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoTreeData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoRelatedData.xml"/>
+     -->
+
+    <!-- demo data: catalog - extended (configuration) -->
+    <!-- 
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoCatalogConfigurationData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoCatalogI18nData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoCatalogAdditionalViewData.xml"/>
+     -->
+    
+    <!-- demo data: content - extended -->
+    <!-- 
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoTreeContentData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoContentAltUrlData.xml"/>
+     -->
+    
+    <!-- demo data: store config, shipping, parties -->
+    <!-- FIXME: for some reason rental shipping is required for main store shipping... order should be reversed -->
+    <entity-resource type="data" reader-name="ext-demo" loader="main" location="data/GrossPartyData.xml"/>
+    
+    <!-- auxiliary catalog data -->
+    <!-- 
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoCatalogTransientData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DemoCatalogImageData.xml"/>
+     -->
+
+    <!-- service resources: model(s), eca(s) and group definitions -->
+    <service-resource type="model" loader="main" location="servicedef/services.xml"/>
+    <!--
+    <service-resource type="eca" loader="main" location="servicedef/secas.xml"/>
+    <service-resource type="group" loader="main" location="servicedef/groups.xml"/>
+    -->
+
+    <!-- web applications; will be mounted when using the embedded container -->
+    <webapp name="grossshop"
+        title="GrossShop"
+        server="default-server"
+        location="webapp/grossshop"
+        mount-point="/grossshop"
+        menu-name="secondary"
+        />
+</ofbiz-component>

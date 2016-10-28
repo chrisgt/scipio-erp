@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<entity-engine-xml>
+    <Party partyId="admin" partyTypeId="PERSON"/>
+    <Person firstName="THE" lastName="ADMINISTRATOR" middleName="PRIVILEGED" partyId="admin" personalTitle="Mr."/>
+    <PartyRole partyId="admin" roleTypeId="BUYER"/>
+    <PartyRole partyId="admin" roleTypeId="MANAGER"/>
+    <PartyRole partyId="admin" roleTypeId="ORDER_CLERK"/>
+    <PartyRole partyId="admin" roleTypeId="SHIPMENT_CLERK"/>
+    <PartyRole partyId="admin" roleTypeId="SALES_REP"/>
+    <PartyRole partyId="admin" roleTypeId="_NA_"/>
+    <UserLogin userLoginId="admin" partyId="admin"/>
+
+    <!-- The main Company Internal Organization -->
+    <Party partyId="GrossCompany" partyTypeId="PARTY_GROUP"/>
+    <PartyGroup partyId="GrossCompany" groupName="Your Company Name Here"/>
+    <PartyRole partyId="GrossCompany" roleTypeId="BILL_FROM_VENDOR"/>
+    <PartyRole partyId="GrossCompany" roleTypeId="BILL_TO_CUSTOMER"/>
+    <PartyRole partyId="GrossCompany" roleTypeId="INTERNAL_ORGANIZATIO"/>
+    <PartyRole partyId="GrossCompany" roleTypeId="_NA_"/>
+    <ContactMech contactMechId="9000" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PartyContactMech partyId="GrossCompany" contactMechId="9000" fromDate="2000-01-01 00:00:00.000" allowSolicitation="Y"/>
+    <PostalAddress contactMechId="9000" toName="Company XYZ" address1="2003 Open Blvd" city="Open City" postalCode="999999" countryGeoId="DEU" stateProvinceGeoId="CA" geoPointId="9000"/>
+    <ContactMech contactMechId="GrossCompany" contactMechTypeId="EMAIL_ADDRESS" infoString="ofbiztest@example.com"/>
+    <PartyContactMech partyId="GrossCompany" contactMechId="GrossCompany" fromDate="2000-01-01 00:00:00.000" allowSolicitation="Y"/>
+    <PartyContactMechPurpose contactMechPurposeTypeId="PRIMARY_EMAIL" partyId="GrossCompany" contactMechId="GrossCompany" fromDate="2003-01-01 00:00:00.000"/>
+    <ContactMech contactMechId="CompanySupport" contactMechTypeId="EMAIL_ADDRESS" infoString="ofbizsupport@example.com"/>
+    <PartyContactMech partyId="GrossCompany" contactMechId="CompanySupport" fromDate="2003-01-01 00:00:00.0" allowSolicitation="Y"/>
+    <PartyContactMechPurpose contactMechPurposeTypeId="SUPPORT_EMAIL" partyId="GrossCompany" contactMechId="CompanySupport" fromDate="2003-01-01 00:00:00.0"/>
+    <PartyContactMechPurpose partyId="GrossCompany" contactMechId="9000" contactMechPurposeTypeId="BILLING_LOCATION" fromDate="2000-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="GrossCompany" contactMechId="9000" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2000-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="GrossCompany" contactMechId="9000" contactMechPurposeTypeId="PAYMENT_LOCATION" fromDate="2000-01-01 00:00:00.000"/>
+    <PartyGeoPoint partyId="GrossCompany" geoPointId="9000" fromDate="2009-01-09 00:00:00.000"/>
+
+</entity-engine-xml>
